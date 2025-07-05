@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Script per estrazione tuple da articoli - Versione PC Migliorata - ERRORE RISOLTO
-Convertito da Google Colab con prompt e pulizia migliorati
-RISOLTO: Context window exceeded error
-"""
-
 import torch
 import huggingface_hub
 import os
@@ -31,7 +25,6 @@ def setup_model():
     else:
         print("CUDA non disponibile, utilizzo CPU")
     
-    # Define the model name and file
     model_name = "MaziyarPanahi/Llama-3-8B-Instruct-v0.10-GGUF"
     
     # Scegli il livello di quantizzazione (puoi cambiare qui)
@@ -67,7 +60,7 @@ def load_excel_file():
     root = tk.Tk()
     root.withdraw()
     
-    # Apri dialog per selezionare file
+    # Apri dialog per selezionare file [train.xlsx]
     file_path = filedialog.askopenfilename(
         title="Seleziona il file Excel",
         filetypes=[("Excel files", "*.xlsx *.xls"), ("All files", "*.*")]
@@ -202,7 +195,7 @@ def process_articles(df, llm):
         while max_words <= 150:  # Massimo 150 parole
             testo_ridotto = ' '.join(testo_originale.split()[:max_words])
             
-            # Crea prompt completo (ora possibile con 1024 token)
+            # Crea prompt completo (ora possibile con 1024 token - 2048)
             user_input = create_full_prompt(testo_ridotto)
             
             # Controlla se il prompt è troppo lungo
@@ -316,7 +309,7 @@ def main():
         print("Caricamento del modello LLM...")
         llm = Llama(
             model_path=model_path,
-            n_ctx=1024,  # Context window di 1024 token
+            n_ctx=1024,  # Context window di 1024 token -amplia a 2048
             verbose=False  # Riduci output verboso
         )
         print("Modello caricato con successo!")

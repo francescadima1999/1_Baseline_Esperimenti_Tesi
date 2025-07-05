@@ -18,9 +18,9 @@ consumer_client = OpenCTIApiClient(CONSUMER_URL, CONSUMER_TOKEN)
 
 def sync_indicators():
     try:
-        print("✓ Recupero degli indicatori dal Producer in corso...")
+        print(" Recupero degli indicatori dal Producer in corso...")
         indicators = producer_client.indicator.list(get_all=True, first=10000)
-        print(f"✓ {len(indicators)} indicatori trovati.")
+        print(f" {len(indicators)} indicatori trovati.")
 
         success = 0
         failed = 0
@@ -46,17 +46,17 @@ def sync_indicators():
                 )
 
                 success += 1
-                print(f"✓ [{index+1}] Indicatore sincronizzato: {name}")
-                time.sleep(0.1)  # evita overload API
+                print(f" [{index+1}] Indicatore sincronizzato: {name}")
+                time.sleep(0.1)  
 
             except Exception as e:
                 failed += 1
-                print(f"✗ [{index+1}] Errore nel creare indicatore '{name}': {e}")
+                print(f" [{index+1}] Errore nel creare indicatore '{name}': {e}")
 
-        print(f"\n✅ Sincronizzazione completata: {success} creati, {failed} falliti.")
+        print(f"\n Sincronizzazione completata: {success} creati, {failed} falliti.")
 
     except Exception as e:
-        print("✗ Errore durante la sincronizzazione:")
+        print(" Errore durante la sincronizzazione:")
         traceback.print_exc()
 
 if __name__ == "__main__":
