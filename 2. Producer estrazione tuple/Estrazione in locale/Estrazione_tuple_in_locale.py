@@ -309,7 +309,7 @@ def main():
         print("Caricamento del modello LLM...")
         llm = Llama(
             model_path=model_path,
-            n_ctx=1024,  # Context window di 1024 token -amplia a 2048
+            n_ctx=2048,  # Context window di 1024 token -amplia a 2048
             verbose=False  # Riduci output verboso
         )
         print("Modello caricato con successo!")

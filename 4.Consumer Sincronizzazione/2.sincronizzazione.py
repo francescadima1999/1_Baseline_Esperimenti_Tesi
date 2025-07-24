@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#la sincronizzazione avviene tramite le API rest Questo script si connette all'istanze del producer tramite api REST fa una get e ottine egli indicatori.
+#poi fa una post all'istanza del consumer, 8080 , e li carica lì.
 from pycti import OpenCTIApiClient
 import time
 import traceback
@@ -19,6 +20,7 @@ consumer_client = OpenCTIApiClient(CONSUMER_URL, CONSUMER_TOKEN)
 def sync_indicators():
     try:
         print(" Recupero degli indicatori dal Producer in corso...")
+        # PRIMA: GET dal Producer
         indicators = producer_client.indicator.list(get_all=True, first=10000)
         print(f" {len(indicators)} indicatori trovati.")
 
